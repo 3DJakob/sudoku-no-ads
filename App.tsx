@@ -1,13 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native'
+import { Board, generateBoard } from './lib/board'
+import Sudoku from './components/Sudoku'
+import { useState } from 'react'
 
-export default function App() {
+const App: React.FC = () => {
+  const [board, setBoard] = useState<Board>(generateBoard())
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Sudoku board={board} />
+      <Button onPress={() => setBoard(generateBoard())} title='Generate' />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -15,6 +19,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    justifyContent: 'center'
+  }
+})
+
+export default App
