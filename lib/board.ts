@@ -1,4 +1,4 @@
-export type CellValue = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+export type CellValue = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 // 0 is empty
 
 export type BoardRow = [
   CellValue, CellValue, CellValue,
@@ -37,6 +37,18 @@ export const getColumn = (board: Board, column: number): BoardRow => {
     columnValues.push(board[i][column])
   }
   return columnValues as BoardRow
+}
+
+export const getQuadrant = (board: Board, row: number, column: number): BoardRow => {
+  const quadrantValues = []
+  const quadrantRow = Math.floor(row / 3) * 3
+  const quadrantCol = Math.floor(column / 3) * 3
+  for (let i = quadrantRow; i < quadrantRow + 3; i++) {
+    for (let j = quadrantCol; j < quadrantCol + 3; j++) {
+      quadrantValues.push(board[i][j])
+    }
+  }
+  return quadrantValues as BoardRow
 }
 
 export const isValid = (board: Board, row: number, col: number, num: CellValue): boolean => {
